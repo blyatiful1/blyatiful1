@@ -1,6 +1,6 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/blyatiful1/blyatiful1/main/banner-dark.svg">
-  <img src="https://raw.githubusercontent.com/blyatiful1/blyatiful1/main/banner-light.svg" width="720" height="316" alt="Iwan Braun — agent infrastructure. A blueprint: two Claude Code plugins, ultraweb (design studio, 80 skills, 7 gates) and hardmode (discipline floor, hooks, verification), seated on Claude Code, shipping ultraweb-site with 7 of 7 gates green.">
+  <img src="https://raw.githubusercontent.com/blyatiful1/blyatiful1/main/banner-light.svg" width="720" height="208" alt="Iwan Braun — agent infrastructure. I direct AI agents; they write the code — 254 of 256 commits. ultraweb, hardmode, gtheme, NightCityMP.">
 </picture>
 
 I direct AI agents, and most of what they build is tooling for directing AI agents
