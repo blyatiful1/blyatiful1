@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./banner-dark.svg">
-  <img src="./banner-light.svg" width="720" height="316" alt="Iwan Braun — agent infrastructure. A blueprint: two Claude Code plugins, ultraweb (design studio, 80 skills, 7 gates) and hardmode (discipline floor, hooks, verification), seated on Claude Code, shipping ultraweb-site with 7 of 7 gates green.">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/blyatiful1/blyatiful1/main/banner-dark.svg">
+  <img src="https://raw.githubusercontent.com/blyatiful1/blyatiful1/main/banner-light.svg" width="720" height="316" alt="Iwan Braun — agent infrastructure. A blueprint: two Claude Code plugins, ultraweb (design studio, 80 skills, 7 gates) and hardmode (discipline floor, hooks, verification), seated on Claude Code, shipping ultraweb-site with 7 of 7 gates green.">
 </picture>
 
 I build the layer between an AI agent and work you'd actually defend — harnesses that make a model
