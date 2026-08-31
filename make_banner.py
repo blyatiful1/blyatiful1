@@ -13,6 +13,7 @@ Every number below is measured, not decorative:
   carry a Claude authorship marker.
 """
 import pathlib
+import re
 import xml.etree.ElementTree as ET
 
 W = 720
@@ -161,6 +162,10 @@ def main() -> None:
         ET.fromstring(svg)  # refuse to ship malformed XML
         (out / f"banner-{theme}.svg").write_text(svg, encoding="utf-8")
         print(f"banner-{theme}.svg  <- {LIVE}  ({len(svg)} bytes, XML OK)")
+        h = re.search(r'height="(\d+)"', svg).group(1)
+    # the README hardcodes the banner height so GitHub reserves the slot; a
+    # variant swap that forgets this leaves a gap under the image
+    print(f'reminder: README <img> must read height="{h}" for LIVE={LIVE}')
 
 
 if __name__ == "__main__":
