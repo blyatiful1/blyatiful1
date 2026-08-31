@@ -17,11 +17,6 @@ your own phone.
 80 skills · 3 model-routed subagents · 7 screenshot-verified quality gates · a written taste
 constitution that every other skill defers to.
 
-```text
-/plugin marketplace add blyatiful1/ultraweb
-/plugin install ultraweb@ultraweb
-```
-
 The showcase — **[ultraweb-site](https://github.com/blyatiful1/ultraweb-site)** — was built by that
 pipeline from one prompt, with no human touch-ups. Every decision it made on the way is committed in
 `design/*.md`, so if the site were bad you could prove it from the repo:

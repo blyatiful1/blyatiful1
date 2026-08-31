@@ -28,7 +28,9 @@ THEMES = {
 
 # geometry -- box centres are derived, never hand-typed, so the connectors
 # below the boxes cannot drift off-centre again
-PAD, GAP = 32, 24
+# PAD is deliberately tiny: the banner's masthead must sit on the same left
+# edge as the README prose beside it, and any inset here reads as misalignment
+PAD, GAP = 4, 24
 BOX_W = (W - 2 * PAD - GAP) // 2          # 316
 BOX_Y, BOX_H = 110, 98
 SLAB_Y, SLAB_H = 232, 40
