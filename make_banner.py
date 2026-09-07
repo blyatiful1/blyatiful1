@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
 """Generates the profile banner.
 
-Four directions are kept below; LIVE picks the one written to
+Three directions are kept below; LIVE picks the one written to
 banner-{light,dark}.svg. Swapping the banner is a one-word edit.
 
-Same hard constraints as the shipped banner: system font stacks only (camo
-loads no webfonts), no external refs, valid XML, and legible when GitHub
-scales it to a 293px mobile column (~40%).
-
-Every number below is measured, not decorative:
-  254 / 256 non-merge commits across ultraweb, hardmode, gtheme, NightCityMP
-  carry a Claude authorship marker.
+Hard constraints, shared by every direction: system font stacks only (camo
+loads no webfonts), no external refs, valid XML, no numbers in the visible
+text, and legible when GitHub scales the banner to a narrow mobile column.
 """
 import pathlib
 import re
@@ -22,13 +18,13 @@ MONO = "ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',m
 
 THEMES = {
     "light": dict(ink="#1f2328", muted="#59636e", line="#d1d9e0",
-                  accent="#BC4C00", slab="#f6f8fa", dot="#d0d7de", hand="#1f2328"),
+                  accent="#BC4C00", slab="#f6f8fa", dot="#d0d7de"),
     "dark": dict(ink="#f0f6fc", muted="#9198a1", line="#3d444d",
-                 accent="#F0883E", slab="#161b22", dot="#30363d", hand="#f0f6fc"),
+                 accent="#F0883E", slab="#161b22", dot="#30363d"),
 }
 
-AI, TOTAL = 254, 256
 PAD = 4
+REPOS = "ultraweb · hardmode · gtheme · NightCityMP"
 
 HEAD = ('<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" '
         'viewBox="0 0 {w} {h}" role="img" aria-label="{aria}"><title>{aria}</title>'
@@ -54,11 +50,11 @@ def rule(c, y):
 # ---------------------------------------------------------------- A: blueprint
 def variant_a(c):
     h = 316
-    aria = ("Iwan Braun, agent infrastructure. ultraweb and hardmode seated on Claude Code. "
-            f"{AI} of {TOTAL} commits written by AI.")
+    aria = ("Iwan Braun, agent infrastructure. ultraweb and hardmode seated on Claude Code, "
+            "which writes the code in these repos.")
     s = [HEAD.format(w=W, h=h, aria=aria, **c), masthead(c), rule(c, 90)]
-    boxes = [("ultraweb", "design studio", "80 skills · 7 gates"),
-             ("hardmode", "discipline floor", "hooks · verification")]
+    boxes = [("ultraweb", "design studio", "browser-verified gates"),
+             ("hardmode", "discipline floor", "hooks · verifiers")]
     bw, gap, by, bh = (W - 2 * PAD - 24) // 2, 24, 110, 98
     for i, (title, role, stat) in enumerate(boxes):
         x = PAD + i * (bw + gap)
@@ -78,47 +74,20 @@ def variant_a(c):
              f'<path d="M {W//2} 272 L {W//2} 290" stroke="{c["accent"]}" stroke-width="1.5" '
              f'fill="none" marker-end="url(#t)"/>'
              f'<text x="{W//2}" y="312" text-anchor="middle" font-family="{MONO}" font-size="12.5" '
-             f'fill="{c["muted"]}">it wrote <tspan fill="{c["accent"]}">{AI} of {TOTAL}</tspan> commits in these repos</text>')
-    return "".join(s) + "</svg>"
-
-
-# ------------------------------------------------------------ B: provenance bar
-def variant_b(c):
-    h = 236
-    aria = (f"Iwan Braun, agent infrastructure. A bar showing {AI} of {TOTAL} commits "
-            "written by AI and 2 written by hand.")
-    inner = W - 2 * PAD
-    ai_w = round(inner * AI / TOTAL)
-    s = [HEAD.format(w=W, h=h, aria=aria, **c), masthead(c), rule(c, 90),
-         f'<text x="{PAD}" y="118" font-family="{MONO}" font-size="12" letter-spacing="2.6" '
-         f'fill="{c["muted"]}">WHO WROTE THE CODE</text>',
-         # the bar: AI segment, then the 2-commit sliver at true scale (2/256)
-         f'<rect x="{PAD}" y="132" width="{ai_w}" height="38" rx="4" fill="{c["accent"]}"/>',
-         f'<rect x="{PAD+ai_w+2}" y="132" width="{inner-ai_w-2}" height="38" rx="2" fill="{c["hand"]}"/>',
-         f'<text x="{PAD+18}" y="157" font-family="{SANS}" font-size="16" font-weight="700" '
-         f'fill="#ffffff">Claude Code — {AI} commits</text>',
-         # short leader tying the label to the near-invisible human sliver
-         f'<path d="M {W-PAD-3} 174 L {W-PAD-3} 186" stroke="{c["line"]}" stroke-width="1"/>',
-         f'<text x="{W-PAD}" y="200" text-anchor="end" font-family="{MONO}" font-size="12" '
-         f'fill="{c["muted"]}">2 by hand</text>',
-         f'<text x="{PAD}" y="226" font-family="{MONO}" font-size="12.5" fill="{c["muted"]}">'
-         f'{TOTAL} content commits · ultraweb · hardmode · gtheme · NightCityMP</text>']
+             f'fill="{c["muted"]}">it writes <tspan fill="{c["accent"]}">the code</tspan> in these repos</text>')
     return "".join(s) + "</svg>"
 
 
 # -------------------------------------------------------- C: provenance label
 def variant_c(c):
-    h = 288
-    aria = (f"Iwan Braun, agent infrastructure. A provenance label: written by Claude Code, "
-            f"directed by Iwan Braun, {AI} of {TOTAL} commits AI-authored.")
+    h = 262
+    aria = ("Iwan Braun, agent infrastructure. A provenance label: written by Claude Code, "
+            "directed by Iwan Braun, held to a standard written down before the model starts.")
     rows = [("WRITTEN BY", "Claude Code", True),
             ("DIRECTED BY", "Iwan Braun", False),
-            ("AI-AUTHORED", f"{AI} / {TOTAL} commits", True),
-            # the real reproduction command is too long for a banner; point at the
-            # README rather than print a short one that does NOT reproduce the number
-            ("VERIFY", "command in README", False)]
+            ("STANDARD", "written down before the model starts", True)]
     s = [HEAD.format(w=W, h=h, aria=aria, **c), masthead(c), rule(c, 90),
-         f'<rect x="{PAD}" y="106" width="{W-2*PAD}" height="150" rx="7" fill="{c["slab"]}" '
+         f'<rect x="{PAD}" y="106" width="{W-2*PAD}" height="124" rx="7" fill="{c["slab"]}" '
          f'stroke="{c["line"]}" stroke-width="1.25"/>',
          f'<text x="{PAD+22}" y="132" font-family="{MONO}" font-size="11" letter-spacing="2.8" '
          f'fill="{c["accent"]}">PROVENANCE</text>']
@@ -128,30 +97,39 @@ def variant_c(c):
                  f'letter-spacing="1.6" fill="{c["muted"]}">{k}</text>'
                  f'<text x="{PAD+170}" y="{y}" font-family="{MONO}" font-size="13" '
                  f'fill="{c["accent"] if hi else c["ink"]}">{v}</text>')
-    s.append(f'<text x="{PAD}" y="278" font-family="{MONO}" font-size="12" fill="{c["muted"]}">'
-             f'ultraweb · hardmode · gtheme · NightCityMP</text>')
+    s.append(f'<text x="{PAD}" y="252" font-family="{MONO}" font-size="12" fill="{c["muted"]}">'
+             f'{REPOS}</text>')
     return "".join(s) + "</svg>"
 
 
 # ------------------------------------------------------------- D: typographic
 def variant_d(c):
     h = 208
-    aria = (f"Iwan Braun. I direct AI agents; they write the code — {AI} of {TOTAL} commits.")
+    aria = ("Iwan Braun, agent infrastructure. I direct AI agents; they write the code; "
+            f"I hold it to a standard. {REPOS.replace(' · ', ', ')}.")
     s = [HEAD.format(w=W, h=h, aria=aria, **c),
          masthead(c, sub="AGENT INFRASTRUCTURE", y=64, size=46), rule(c, 108),
          f'<text x="{PAD}" y="140" font-family="{SANS}" font-size="19" fill="{c["ink"]}">'
-         f'I direct AI agents. <tspan fill="{c["muted"]}">They write the code —</tspan> '
-         f'<tspan fill="{c["accent"]}" font-weight="700">{AI} of {TOTAL} commits.</tspan></text>',
+         f'I direct AI agents. <tspan fill="{c["muted"]}">They write the code.</tspan> '
+         f'<tspan fill="{c["accent"]}" font-weight="700">I hold it to a standard.</tspan></text>',
          f'<text x="{PAD}" y="176" font-family="{MONO}" font-size="12.5" fill="{c["muted"]}">'
-         f'ultraweb · hardmode · gtheme · NightCityMP</text>']
+         f'{REPOS}</text>']
     return "".join(s) + "</svg>"
 
 
-VARIANTS = {"a-blueprint": variant_a, "b-bar": variant_b,
-            "c-label": variant_c, "d-type": variant_d}
+VARIANTS = {"a-blueprint": variant_a, "c-label": variant_c, "d-type": variant_d}
 
 # which direction is live on the profile
 LIVE = "d-type"
+
+
+def visible_text(root) -> str:
+    """Every character a reader can see or a screen reader will speak."""
+    parts = [root.get("aria-label", "")]
+    for el in root.iter():
+        parts.append(el.text or "")
+        parts.append(el.tail or "")
+    return "".join(parts)
 
 
 def main() -> None:
@@ -159,9 +137,12 @@ def main() -> None:
     fn = VARIANTS[LIVE]
     for theme, c in THEMES.items():
         svg = fn(c)
-        ET.fromstring(svg)  # refuse to ship malformed XML
+        root = ET.fromstring(svg)  # refuse to ship malformed XML
+        digits = re.findall(r"\d", visible_text(root))
+        if digits:  # the profile makes its case in words, not counts
+            raise SystemExit(f"banner-{theme}.svg: numbers in visible text: {digits}")
         (out / f"banner-{theme}.svg").write_text(svg, encoding="utf-8")
-        print(f"banner-{theme}.svg  <- {LIVE}  ({len(svg)} bytes, XML OK)")
+        print(f"banner-{theme}.svg  <- {LIVE}  ({len(svg)} bytes, XML OK, no numbers)")
         h = re.search(r'height="(\d+)"', svg).group(1)
     # the README hardcodes the banner height so GitHub reserves the slot; a
     # variant swap that forgets this leaves a gap under the image
