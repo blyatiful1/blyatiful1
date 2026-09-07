@@ -6,7 +6,12 @@ banner-{light,dark}.svg. Swapping the banner is a one-word edit.
 
 Hard constraints, shared by every direction: system font stacks only (camo
 loads no webfonts), no external refs, valid XML, no numbers in the visible
-text, and legible when GitHub scales the banner to a narrow mobile column.
+text, and legible when GitHub scales the banner to a phone column, which is
+under half its width: anything a reader must read is set large enough to
+survive that.
+
+The test for any future addition, here or in the README: does it let a
+visitor check something, or ask them to admire something?
 """
 import pathlib
 import re
@@ -36,10 +41,10 @@ HEAD = ('<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" '
         '<rect width="{w}" height="{h}" fill="url(#g)"/>')
 
 
-def masthead(c, sub="AGENT INFRASTRUCTURE", y=48, size=36):
+def masthead(c, sub="AGENT INFRASTRUCTURE", y=48, size=36, sub_size=11.5, sub_gap=24):
     return (f'<text x="{PAD}" y="{y}" font-family="{SANS}" font-size="{size}" '
             f'font-weight="700" letter-spacing="4.5" fill="{c["ink"]}">IWAN BRAUN</text>'
-            f'<text x="{PAD+3}" y="{y+24}" font-family="{MONO}" font-size="11.5" '
+            f'<text x="{PAD+3}" y="{y+sub_gap}" font-family="{MONO}" font-size="{sub_size}" '
             f'letter-spacing="3.2" fill="{c["muted"]}">{sub}</text>')
 
 
@@ -104,16 +109,17 @@ def variant_c(c):
 
 # ------------------------------------------------------------- D: typographic
 def variant_d(c):
+    # Sized for the phone column: the thesis is what the banner exists for, so it
+    # gets two lines at a size that is still readable at under half scale.
     h = 208
-    aria = ("Iwan Braun, agent infrastructure. I direct AI agents; they write the code; "
-            f"I hold it to a standard. {REPOS.replace(' · ', ', ')}.")
+    aria = ("Iwan Braun, agent infrastructure. I direct AI agents. They write the code. "
+            "I hold it to a standard.")
     s = [HEAD.format(w=W, h=h, aria=aria, **c),
-         masthead(c, sub="AGENT INFRASTRUCTURE", y=64, size=46), rule(c, 108),
-         f'<text x="{PAD}" y="140" font-family="{SANS}" font-size="19" fill="{c["ink"]}">'
-         f'I direct AI agents. <tspan fill="{c["muted"]}">They write the code.</tspan> '
-         f'<tspan fill="{c["accent"]}" font-weight="700">I hold it to a standard.</tspan></text>',
-         f'<text x="{PAD}" y="176" font-family="{MONO}" font-size="12.5" fill="{c["muted"]}">'
-         f'{REPOS}</text>']
+         masthead(c, y=60, size=46, sub_size=16, sub_gap=30), rule(c, 108),
+         f'<text x="{PAD}" y="148" font-family="{SANS}" font-size="27" fill="{c["ink"]}">'
+         f'I direct AI agents. <tspan fill="{c["muted"]}">They write the code.</tspan></text>',
+         f'<text x="{PAD}" y="186" font-family="{SANS}" font-size="27" font-weight="700" '
+         f'fill="{c["accent"]}">I hold it to a standard.</text>']
     return "".join(s) + "</svg>"
 
 
