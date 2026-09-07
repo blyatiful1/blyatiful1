@@ -26,10 +26,10 @@ produces when someone holds it to a standard*. Judge it on the artifacts.
 A Claude Code plugin that builds production Next.js and Tailwind sites through a
 guided design session. Describe the site in a sentence, answer a few scoping
 questions (never about colours or fonts), pick from a handful of deliberately
-different mockups, and the pipeline builds, tests and ships the rest. It pauses
-where a studio would: mockup approval, first-page review and final acceptance.
-When Vercel is connected, the last two come with a preview URL you can open on your
-own phone.
+different mockups, and the pipeline builds, tests and ships the rest. By default it
+pauses at mockup approval, first-page review and final acceptance. When Vercel is
+connected, the first-page review and final acceptance come with a preview URL you can
+open on your own phone.
 
 Nothing ships on the model's say-so. The gates run against a production build in a
 real browser: compile and typecheck, responsive screenshots, an adversarial design
@@ -38,8 +38,8 @@ critique, accessibility, performance, an anti-slop sweep for purple AI gradients
 never ships; a gate that could not run holds the release until you accept each
 named risk.
 
-The `taste` skill is a written design constitution every other skill defers to, and
-every phase writes its decisions to `design/*.md`.
+The `taste` skill is a written design constitution every other skill defers to. Every
+phase writes its decisions to `design/*.md`, so every decision is on record.
 
 The showcase, **[ultraweb-site](https://github.com/blyatiful1/ultraweb-site)**, is
 what that pipeline produced from one prompt with no human touch-ups. The repo holds
