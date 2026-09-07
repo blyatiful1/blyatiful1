@@ -34,7 +34,8 @@ Nothing ships on the model's say-so. The gates run against a production build in
 real browser: build and typecheck, responsive screenshots, an adversarial design
 critique, accessibility, performance, an anti-slop sweep for purple AI gradients and
 "Empower your workflow" copy, and a hunt for placeholders and dead links. A failed
-gate never ships; one that could not run ships only after you accept each named risk.
+gate blocks the release. A gate that could not run blocks it too, until you accept
+each named risk.
 
 The `taste` skill is a written design constitution every other skill defers to, and
 every phase writes its decisions to `design/*.md`. The showcase,
