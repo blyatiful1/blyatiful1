@@ -11,7 +11,7 @@ point of them, not a disclaimer.
 
 Essentially every commit that touches the code in the repos below was made with Claude
 Code, and the git history says so: Claude is named as author or co-author on nearly
-all of them. Clone any of them and read the log.
+all of them. Clone any repo and read the log.
 
 What's mine is the part `git log` doesn't record: choosing the problem, writing the
 standard down before the model starts, and binning what doesn't meet it. These repos
@@ -26,8 +26,8 @@ produces when someone holds it to a standard*. Judge it on the artifacts.
 A Claude Code plugin that builds production Next.js and Tailwind sites through a
 guided design session. Describe the site in a sentence, answer a few scoping
 questions (never about colours or fonts), pick from a handful of deliberately
-different mockups, and the pipeline builds, tests and ships the rest. It stops for
-review where a studio would: mockup approval, first-page review and final acceptance.
+different mockups, and the pipeline builds, tests and ships the rest. It pauses
+where a studio would: mockup approval, first-page review and final acceptance.
 When Vercel is connected, the last two come with a preview URL you can open on your
 own phone.
 
@@ -35,14 +35,17 @@ Nothing ships on the model's say-so. The gates run against a production build in
 real browser: compile and typecheck, responsive screenshots, an adversarial design
 critique, accessibility, performance, an anti-slop sweep for purple AI gradients and
 "Empower your workflow" copy, and a hunt for placeholders and dead links. A failure
-never ships; a gate that could not run holds the release until you accept each named risk.
+never ships; a gate that could not run holds the release until you accept each
+named risk.
+
 The `taste` skill is a written design constitution every other skill defers to, and
 every phase writes its decisions to `design/*.md`.
 
-The showcase, **[ultraweb-site](https://github.com/blyatiful1/ultraweb-site)**, was
-built by that pipeline from one prompt with no human touch-ups, paper trail included,
-and is live at **[ultraweb-site.vercel.app](https://ultraweb-site.vercel.app)**. If
-the site were bad, the source would show it.
+The showcase, **[ultraweb-site](https://github.com/blyatiful1/ultraweb-site)**, is
+what that pipeline produced from one prompt with no human touch-ups. The repo holds
+the source and the full paper trail, and the site is live at
+**[ultraweb-site.vercel.app](https://ultraweb-site.vercel.app)**. If anything had
+been fixed by hand, the history would show it.
 
 ### [hardmode](https://github.com/blyatiful1/hardmode) · a discipline floor for Claude Code
 
@@ -54,8 +57,8 @@ sit behind hooks that cannot be talked out of, and the checks that matter go to
 fresh-context agents that are read-only by hook enforcement, not by promise.
 
 One of those hooks, the claim-audit gate, reads the transcript for evidence that a
-check ran and passed after the last edit. A per-session ledger records whether the
-floor actually fired, so "the floor is armed" is measured rather than assumed.
+check ran and passed after the last edit. A per-session ledger records whether those
+hooks actually fired, so "the floor is armed" is measured rather than assumed.
 `python tools/demo.py` runs the shipped hooks against planted failure modes in a
 throwaway sandbox and asserts each one behaves; CI runs it on every push.
 
@@ -65,8 +68,9 @@ throwaway sandbox and asserts each one behaves; CI runs it on every push.
 GNOME desktop looks, for people new to Linux. Wallpaper, colours, icons, pointer,
 fonts, top bar and add-ons in one window, every switch explained in plain words.
 Everything is saved first, changes are all-or-nothing, Ctrl+Z undoes from anywhere,
-and a "before gtheme" snapshot is kept forever. Looks, its whole-desktop presets, are
-settings, not code, and cannot run programs. No account, no server, no telemetry.
+and a "before gtheme" snapshot is kept forever. Its whole-desktop presets, called
+Looks, are settings rather than code, so they cannot run programs. No account, no
+server, no telemetry.
 
 **[NightCityMP](https://github.com/blyatiful1/NightCityMP)** — multiplayer for
 Cyberpunk 2077. Host and join like Minecraft. A continuation of CyberpunkMP.
