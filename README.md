@@ -1,6 +1,6 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/blyatiful1/blyatiful1/main/banner-dark.svg">
-  <img src="https://raw.githubusercontent.com/blyatiful1/blyatiful1/main/banner-light.svg" width="720" height="208" alt="Iwan Braun, agent infrastructure. I direct AI agents; they write the code; I hold it to a standard. ultraweb, hardmode, gtheme, NightCityMP.">
+  <img src="https://raw.githubusercontent.com/blyatiful1/blyatiful1/main/banner-light.svg" width="720" height="208" alt="Iwan Braun, agent infrastructure. I direct AI agents. They write the code. I hold it to a standard.">
 </picture>
 
 I direct AI agents, and much of what they build is tooling for directing AI agents
