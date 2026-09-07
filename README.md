@@ -27,8 +27,9 @@ A Claude Code plugin that builds production Next.js and Tailwind sites through a
 guided design session. Describe the site in a sentence, answer a few scoping
 questions (never about colours or fonts), pick from a handful of deliberately
 different mockups, and the pipeline builds, tests and ships the rest. It stops for
-review where a studio would: mockup approval, first-page review and final acceptance,
-each with a preview URL you can open on your own phone when Vercel is connected.
+review where a studio would: mockup approval, first-page review and final acceptance.
+When Vercel is connected, the last two come with a preview URL you can open on your
+own phone.
 
 Nothing ships on the model's say-so. The gates run against a production build in a
 real browser: compile and typecheck, responsive screenshots, an adversarial design
